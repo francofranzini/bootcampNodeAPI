@@ -1,8 +1,6 @@
-import axios from 'axios'
-
 const express = require('express')
 const app = express()
-
+const axios = require('axios')
 app.use(express.json())
 
 let notes = [
@@ -26,13 +24,25 @@ let notes = [
   }
 ]
 
-const hello = '<h1>Hello Nashe</h1'
+const hello = '<h1>Hello Nashe</h1>'
+const fetchNotes = () =>{
+  return(axios.get('https://jsonplaceholder.typicode.com/posts')
+  .then(response =>{
+    return response.data;
+  })
+  )
+}
+
+fetchNotes().then(data =>{
+  notes = data;
+})
 
 app.get('/',(request, response) =>{
   response.send(hello)
 })
 
 app.get('/api/notes', (request, response) =>{
+  console.log(notes)
   response.json(notes)
 })
 app.post('/api/notes', (request, response) =>{
