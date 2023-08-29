@@ -45,7 +45,7 @@ app.get('/',(request, response) =>{
 
 app.get('/api/notes', (request, response) =>{
   console.log(notes)
-  response.json(notes)
+  response.send(notes)
 })
 app.post('/api/notes', (request, response) =>{
   const note = request.body
